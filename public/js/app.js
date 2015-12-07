@@ -2,6 +2,8 @@ var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game', { preload: preload, c
 var platforms, cursors, player;
 
 var result = "faggot";
+var step = Math.PI * 2 / 360;
+var counter = 0;
 
 function preload() {
   game.load.image('sky', 'img/sky.jpg');
@@ -26,15 +28,24 @@ function update() {
   player.frame = 4;
   player.inputEnabled = true;
   player.input.enableDrag(true);
+  if (player.dragging)
+  {
+    var tStep = 1 + Math.sin( counter );
+    player.scale.setTo(2 + tStep);
+    counter += step * 10;
+  }
 }
 
 
 function onDragStart(sprite, pointer) {
-  sprite.
+  sprite.dragging = true;
+  counter = 0;
 }
 
 function onDragStop(sprite, pointer) {
-
+  this.add.tween
+  sprite.dragging = false;
+  game.add.tween(player.scale).to({x: 2.0, y: 2.0}, 500, Phaser.Easing.Bounce.Out, true);
 }
 
 function render() {
