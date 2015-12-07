@@ -5,6 +5,10 @@ app.get('/', function(req, res) {
   res.sendFile(__dirname + '/www/index.html');
 })
 
+app.get('/css/normalize.css', function(req, res) {
+  res.sendFile(__dirname + '/node_modules/normalize.css/normalize.css');
+})
+
 app.use(express.static('public'));
 
 var server = app.listen(8080, function() {
